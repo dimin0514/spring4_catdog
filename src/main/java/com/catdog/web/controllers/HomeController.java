@@ -24,9 +24,6 @@ public class HomeController {
 	@GetMapping("/")   //스프링 버전 4.0 이상에서는 이 방식으로 사용가능 get방식은 보안이 필요없어 가장 빠름. p.128
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome {}.", "HomeController");
-			
-		int count = customerService.countEmplyoee();
-		model.addAttribute("count",count);
 		return "index";
 	}
 	
