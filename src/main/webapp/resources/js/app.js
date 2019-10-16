@@ -1,15 +1,36 @@
-var app = (()=>{
-	return {
-		init : (ctx)=>{
-			employeeService.login(ctx);
-			employeeService.join(ctx);
-			employeeService.moveJoin(ctx);
-			
-		}
-		
-	};
-
+"use strict";
+var app = app || {};
+app = (()=>{
+	const WHEN_ERR = '호출하는 JS 파일을 찾지 못했습니다.';
+	let _, js, authjs; //멤버변수, 인스턴스 변수  해당 클래스에서 공유
+	let run =x=> $.getScript(x+'/resources/js/cmm/router.js',
+			()=>{$.extend(new Session(x));
+			onCreate()
+	});
+	let init =()=>{
+		_ = $.ctx();   //메서드? 인스턴스 변수를 가져다 쓸 수 있음
+		js = $.js();
+		authjs = js+'/cmm/auth.js';
+	}
+	let onCreate=()=>{
+		init();
+		$.when(
+			$.getScript(authjs)	
+		)
+		.done(()=>{
+			auth.onCreate()
+		})
+		.fail(()=>{
+			alert(WHEN_ERR)
+		})//~() 할때 성공하면 done() 실패하면 fail() . . .할때마다 엔터 메소드 체인
+		 
+	}
+	return {run:run};
 })();
+
+
+
+
 
 var player = (()=>{
 	var _empNo,_ename,_job,_mgr,_hireDate,_sal,_comm,_deptNo;
