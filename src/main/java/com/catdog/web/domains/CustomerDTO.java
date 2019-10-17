@@ -8,5 +8,20 @@ import lombok.Data;
 @Data @Component
 public class CustomerDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
-	private String empNo,ename,job,mgr,hireDate,sal,comm,deptNo;
+	public String getCid() {
+		return cid;
+	}
+	public void setCid(String cid) {
+		this.cid = cid;
+	}
+	public String getPwd() {
+		return pwd;
+	}
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	private String cid,pwd,ssn,creditCard,pname,phone,address,email;
 }
