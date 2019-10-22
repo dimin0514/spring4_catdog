@@ -61,17 +61,8 @@ auth = (()=>{
 									// soap 방식으로 해야함. ajax 는 soap 방식 안됨!! herf 도
 									// 삭제..
 				// e 는 이벤트 디폴트 방식을 방지한다...
-				let data = {cid:$('#userid').val(), pwd:$('#password').val()} // 제이슨
-																				// 타입으로
-																				// 보내야
-																				// 하니깐..
-																				// 제이슨이
-																				// 들어가야함
-																				// !!
-																				// 중요한건
-																				// 자바
-																				// 받는녀석과
-																				// 맞춰야함!
+				let data = {cid:$('#userid').val(), pwd:$('#password').val(),pname:$('#pname').val()} 
+				// 제이슨 타입으로 보내야 하니깐.. 제이슨이 들어가야함!! 중요한건 자바 받는녀석과 맞춰야함!
 				$.ajax({
 					url : _+'/customer/join',
 					type : 'POST',       // 일단은 그냥 빠르게 보이게... 원래는 숨겨야 해서 POST
@@ -82,15 +73,13 @@ auth = (()=>{
 													// 해라! 받는입장(컨트롤러)와 맞춘다!
 													// 컨트롤러에서 스트링으로 받는다고 해놔서
 													// 스트링화.
-					contentType : 'application/json',
+					contentType : 'application/json',   //밈? jsp 에서도 contentType="text/html; 이라고 있
 					success : d => {
-						alert('AJAX 성공아이디:'+d.cid+',성공비번'+d.pwd);
+						alert('AJAX 성공아이디:'+d.cid+',성공비번'+d.pwd+',P네임'+d.pname);
 						login()
-						
 					}, // send , d는 자바에서의 map
 					error : e => {
 						alert('AJAX 실패')
-						
 					} // receive
 					// ajax 는 제이쿼리와 다르게 스트링은 안줌 $.({}) cf)제이쿼리는 $.( ,{})
 				})
@@ -112,7 +101,7 @@ auth = (()=>{
 			text:"Sign in",
 			click : e=>{
 				e.preventDefault();
-				let data = {cid:$('#cid').val(),pwd:$('#pwd').val()}
+				let data = {cid:$('#cid').val(),pwd:$('#pwd').val(),pname:$('#pname').val()}  //auth_vue 에 login_body 에 있는 cid pwd
 				$.ajax({
 					url:_+'/customer/login',
 					type: 'POST',
@@ -120,9 +109,8 @@ auth = (()=>{
 					data :JSON.stringify(data),
 					contentType : 'application/json',
 					success : d =>{
-						alert('ajax id'+d.cid+',비번'+d.pwd)
-						$('h1')
-						.html(auth_vue.login_mypage())
+						alert(d.pname+'님 환영합니다')
+						$('body').html(auth_vue.login_mypage(d))
 					error : e =>{
 						alert('ajax실패')
 					}
@@ -133,5 +121,6 @@ auth = (()=>{
 		.addClass("btn btn-lg btn-primary btn-block")
 		.appendTo('#btn_login')
     }
+
 	return{onCreate, join, login}
 })();

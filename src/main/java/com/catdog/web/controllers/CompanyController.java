@@ -19,12 +19,12 @@ public class CompanyController {
 	@Autowired CompanyController companyController;
 	@Autowired CustomerServiceImpl customerService;  //싱글톤,인스턴스가 스프링 컨테이너에서 싱글톤 객체 하나를 주입해라. 컨테스트가 스캔하면서 주입
 	
-	@GetMapping("/count")          //매핑에는 4가지 매핑 post get, put, delete  읽어오는거고 (파라미터 안은 url)
-	public String count(Model model) {						
-		int count = customerService.countEmplyoee();
-		model.addAttribute("count", count);				
-		return "index";		
-	}
+//	@GetMapping("/count")          //매핑에는 4가지 매핑 post get, put, delete  읽어오는거고 (파라미터 안은 url)
+//	public String count(Model model) {						
+//		int count = customerService.countEmplyoee();
+//		model.addAttribute("count", count);				
+//		return "index";		
+//	}
 	
 	@GetMapping("/info")
 	public String findByCustomerCID(@RequestParam("cid") String cid,

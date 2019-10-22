@@ -16,30 +16,36 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.catdog.web.domains.CustomerDTO;
+import com.catdog.web.serviceimpls.CustomerServiceImpl;
+import com.catdog.web.services.CustomerService;
 
 @Controller   
 @RequestMapping("/customer/*") 		//url 에서 customer 글자 나오면 이거 타라??
 public class CustomerController {
 	public static Logger logger = LoggerFactory.getLogger(CustomerController.class);
-//	@Autowired Map<String,String> map;
+//	@Autowired Map<String,Object> map;
+	@Autowired CustomerServiceImpl customerService;
+	@Autowired CustomerDTO customer;
 
 	@PostMapping("/join")
-	public @ResponseBody Map<?,?> join(@RequestBody CustomerDTO customer) {  //리쿼스트 바디 리스판스 바디!!!
-		Map<String,String> map = new HashMap<>(); //컨트롤러에서 new가 안먹힐 수도 있어서 오토와이어드?
-		logger.info("AJAX가 보낸 아이디 와 비번{}",customer.getCid()+","+customer.getPwd());
-		map.put("cid", customer.getCid());
-		map.put("pwd", customer.getPwd());
-		logger.info("map에 담긴 아이디 와 비번{}",map.get("cid")+","+map.get("pwd"));
-		return map;
+	public @ResponseBody CustomerDTO join(@RequestBody CustomerDTO param) {  //리쿼스트 바디 리스판스 바디!!!
+		logger.info("AJAX가 보낸 아이디 와 비번 pname{}",param.getCid()+","+param.getPwd()+","+param.getPname());
+		customer.setCid(param.getCid());
+		customer.setPwd(param.getPwd());
+		customer.setPname(param.getPname());
+		customerService.join(param);
+		logger.info("조인에서 에 담긴 사용자정보",customer.getCid()+","+customer.getPwd()+","+customer.getPname());
+		return customer;
 	}
 	@PostMapping("/login")
-	public @ResponseBody Map<?,?> login(@RequestBody CustomerDTO customer){
-		Map<String,String> map = new HashMap<>();
-		logger.info("AJAX가 보낸 아이디 와 비번{}",customer.getCid()+","+customer.getPwd());
-		map.put("cid", customer.getCid());
-		map.put("pwd", customer.getPwd());
-		logger.info("map에 담긴 아이디 와 비번{}",map.get("cid")+","+map.get("pwd"));
-		return map;
+	public @ResponseBody CustomerDTO login(@RequestBody CustomerDTO param){
+		logger.info("AJAX가 보낸 아이디 와 비번{}",param.getCid()+","+param.getPwd());
+		customer.setCid(param.getCid());
+		customer.setPwd(param.getPwd());
+		customer.setPname(param.getPname());
+		customer = customerService.login(param);
+		logger.info("customer 에 담긴 사용자정보{}",customer.toString());
+		return customer;
 	}
 
 }

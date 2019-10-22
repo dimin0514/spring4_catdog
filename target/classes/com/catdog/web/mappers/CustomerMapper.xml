@@ -3,7 +3,24 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.catdog.web.mappers.CustomerMapper">
-	<select id="countEmployees" resultType="int">
-		SELECT COUNT(*) FROM CUSTOMER
-	</select>
+    <resultMap type="com.catdog.web.domains.CustomerDTO" id="customer">  
+        <id column="cid" property="cid"/>
+        <result column="pwd" property="pwd"/>
+        <result column="ssn" property="ssn"/>
+        <result column="creditcard" property="creditcard"/>
+        <result column="pname" property="pname"/>
+        <result column="phone" property="phone"/>
+        <result column="address" property="address"/>
+        <result column="email" property="email"/>
+    </resultMap>
+    <insert id="insertCustomer" parameterType="com.catdog.web.domains.CustomerDTO">
+        insert into CUSTOMER (CID, PWD, SSN, CREDITCARD, PNAME, PHONE, ADDRESS, EMAIL) values (
+            #{cid}, #{pwd}, #{ssn}, #{creditcard}, #{pname}, #{phone}, #{address}, #{email}
+        )
+    </insert>
+    <select id="selectCustomerId" resultMap="customer">
+        SELECT * FROM CUSTOMER
+        	 WHERE CID LIKE #{cid}
+    </select>     
+
 </mapper>

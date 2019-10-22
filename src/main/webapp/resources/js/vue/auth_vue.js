@@ -105,27 +105,27 @@ auth_vue = {
         '          </div>'+
         '        </div>'+
         '        <div class="mb-3">'+
-        '          <label for="username">Username</label>'+
+        '          <label for="pname">PNAME</label>'+
         '          <div class="input-group">'+
         '            <div class="input-group-prepend">'+
-        '              <span class="input-group-text">@</span>'+
+        '              <span class="input-group-text"></span>'+
         '            </div>'+
-        '            <input type="text" class="form-control" id="username" placeholder="Username" required="">'+
+        '            <input type="text" id="pname" 	class="form-control" placeholder="pname" required="">'+
         '            <div class="invalid-feedback" style="width: 100%;">'+
         '              Your username is required.'+
         '            </div>'+
         '          </div>'+
         '        </div>'+
         '        <div class="mb-3">'+
-        '          <label for="email">Email <span class="text-muted">(Optional)</span></label>'+
-        '          <input type="email" class="form-control" id="email" placeholder="you@example.com">'+
+        '          <label for="ssn">SSN <span class="text-muted">(Optional)</span></label>'+
+        '          <input type="SSN" class="form-control" id="ssn" placeholder="">'+
         '          <div class="invalid-feedback">'+
         '            Please enter a valid email address for shipping updates.'+
         '          </div>'+
         '        </div>'+
         '        <div class="mb-3">'+
-        '          <label for="address">Address</label>'+
-        '          <input type="text" class="form-control" id="address" placeholder="1234 Main St" required="">'+
+        '          <label for="creditcard">creditcard</label>'+
+        '          <input type="text" class="form-control" id="creditcard" placeholder="creditcard" required="">'+
         '          <div class="invalid-feedback">'+
         '            Please enter your shipping address.'+
         '          </div>'+
@@ -287,8 +287,9 @@ auth_vue = {
 		'</form>'+
 		'</body>'
 	},
-	login_mypage: ()=>{
-		return '<h1>안녕</h1>'
+	login_mypage: d=>{
+		return '<h1>마이페이지 </br>'+d.pname+'</h1>'
+		
 	}
 	
 };

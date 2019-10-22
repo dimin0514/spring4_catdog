@@ -9,24 +9,13 @@ import com.catdog.web.services.CustomerService;
 @Service
 public class CustomerServiceImpl implements CustomerService{
 	@Autowired CustomerMapper customerMapper; //싱글톤 대신 이걸로 대체?? 바로 다오? mapper 로 ...
-
-	@Override
-	public int countEmplyoee() {
-		return customerMapper.countEmployees();
-	}
 	
 	@Override
-	public boolean join(CustomerDTO param) {
-		
-		System.out.println(6);
-		return false;
+	public void join(CustomerDTO param) {
+		customerMapper.insertCustomer(param);
 	}
-
 	@Override
 	public CustomerDTO login(CustomerDTO param) {
-		return null;
+		return customerMapper.selectCustomerId(param);
 	}
-
-	
-
 }
